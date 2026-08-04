@@ -49,29 +49,28 @@ phoneInput.addEventListener(
 
     let hasil = "";
 
-    /* 812 */
-    if(angka.length > 0){
+if (angka.startsWith("0")) {
+    // Format: 0812-3456-7890
+    if (angka.length > 0)
+        hasil += angka.substring(0, 4);
 
-        hasil +=
-        angka.substring(0,3);
+    if (angka.length > 4)
+        hasil += "-" + angka.substring(4, 8);
 
-    }
+    if (angka.length > 8)
+        hasil += "-" + angka.substring(8, 13);
 
-    /* 812-3456 */
-    if(angka.length >= 3){
+} else {
+    // Format: 812-3456-7890
+    if (angka.length > 0)
+        hasil += angka.substring(0, 3);
 
-        hasil += "-" +
-        angka.substring(3,7);
+    if (angka.length > 3)
+        hasil += "-" + angka.substring(3, 7);
 
-    }
-
-    /* 812-3456-7890 */
-    if(angka.length >= 7){
-
-        hasil += "-" +
-        angka.substring(7,13);
-
-    }
+    if (angka.length > 7)
+        hasil += "-" + angka.substring(7, 13);
+}
 
     e.target.value = hasil;
 
@@ -145,10 +144,10 @@ lanjutBtn.addEventListener(
     );
 
     /* VALIDASI */
-    if(
-        nomor.length < 9 ||
-        nomor.charAt(0) !== "8"
-    ){
+    if (
+    nomor.length < 10 ||
+    (nomor.charAt(0) !== "0" && nomor.charAt(0) !== "8")
+){
 
         if(navigator.vibrate){
 
